@@ -65,7 +65,7 @@ namespace MyDefence
             for (int i = 0; i < WaveCount; i++)
             {
                 EnemySpawn();
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(0.5f);
             }
         }
         //시작점 위치에 enemy 1개 생성
