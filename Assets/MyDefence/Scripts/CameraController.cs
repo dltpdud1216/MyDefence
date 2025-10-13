@@ -76,7 +76,7 @@ public class CameraController : MonoBehaviour
             //마우스를 스크린 상하좌우 끝 부분(기준 폭: 10)에 가져가면 맵을 스크롤 시킨다
             float mouseX = Input.mousePosition.x;
             float mouseY = Input.mousePosition.y;
-            Debug.Log($"마우스 position{mouseX},{mouseY}");
+            //Debug.Log($"마우스 position{mouseX},{mouseY}");
 
             //앞으로 이동 - height, height -10
             if (mouseY >= (Screen.height - border) && mouseY<= Screen.height)
