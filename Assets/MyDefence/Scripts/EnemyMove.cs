@@ -41,11 +41,15 @@ namespace MyDefence
             }
         }
         #region Custom Method
+        //종점 도착
         private void Arrive()
         {
+            //생명 사용
+            PlayerStats.UseLife(1);
+            //Enemy 킬
             Destroy(this.gameObject);
-            //Debug.Log("도착했다");
         }
+
         #endregion
     }
 

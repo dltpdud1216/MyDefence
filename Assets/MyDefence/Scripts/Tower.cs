@@ -140,6 +140,9 @@ namespace MyDefence
             {
                 bullet.SetTarget(target.transform);
             }
+
+            //발사되고 3초 뒤에 총알 오브젝트 킬, 유도탄이므로 주석처리
+            //Destroy(bulletGo, 3f);
         }
     }
 }

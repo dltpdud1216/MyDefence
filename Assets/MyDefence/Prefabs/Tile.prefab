@@ -122,4 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverMaterial: {fileID: 2100000, guid: d9ef49744bcc18840a6c834160622202, type: 2}
+  moneyMaterial: {fileID: 2100000, guid: 77c265b6c2e508846a2319cb6b9962f3, type: 2}
   towerprefab: {fileID: 6889594304258157065, guid: d41ea9995ea129b43a6541d0c6cd543f, type: 3}
+  buildEffectprefab: {fileID: 8531487057380192102, guid: cb0b1ce50767aad42ab6063580c252ea, type: 3}
