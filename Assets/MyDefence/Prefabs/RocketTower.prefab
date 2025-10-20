@@ -165,8 +165,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partToRotate: {fileID: 317236078905576268}
-  rotateSpeed: 10
-  attackRange: 12
+  rotateSpeed: 50
+  attackRange: 7
   searchTimer: 0.2
   fireTimer: 1
   bulletprefab: {fileID: 4515434559867765473, guid: d61f1b64c281c6d4f87b9ca41fc9e5f8, type: 3}

@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace MyDefence
 {
@@ -14,6 +15,10 @@ namespace MyDefence
         public GameObject Impactprefab;
 
         public float moveSpeed = 70;
+
+        //공격 데미지
+        [SerializeField]
+        private float attackDamage = 50f;
         #endregion
 
         #region Unity Event Method
@@ -52,20 +57,24 @@ namespace MyDefence
         protected virtual void HitTarget()
         {
             //타격위치에 이펙트를 생성한 후 2초 뒤에 타격 이펙트 오브젝트 kill
-            GameObject effectGo = Instantiate(Impactprefab,this.transform.position,Quaternion.identity);
+            GameObject effectGo = Instantiate(Impactprefab, this.transform.position,Quaternion.identity);
             Destroy(effectGo, 3f);
 
-            //Debug.Log("Hit Enemy!!!");
-            //타겟 킬
-            Destroy(target.gameObject);
+            Damage(target);
             //탄환 킬
             Destroy(this.gameObject);
         }
         //타격당한 적에게 데미지 주기
-        protected void Damage(Transform enemy)
+        protected void Damage(Transform _target)
         {
             //타겟 킬
-            Destroy(enemy.gameObject);
+            //Destroy(_target.gameObject);
+            EnemyMove enemy = _target.GetComponent<EnemyMove>();
+            if(enemy != null)
+            {
+                enemy.TakeDamage(attackDamage);
+            }
+                
         }
         #endregion
     }

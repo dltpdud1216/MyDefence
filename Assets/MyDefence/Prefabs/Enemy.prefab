@@ -121,4 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14adb7942f9f550419dc1d102da8a743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 4
+  startHealth: 100
+  deathEffectprefab: {fileID: 2772209097413628897, guid: 0e438e600f9e5154abff82aaa1529a11, type: 3}
+  Impactprefab: {fileID: 0}

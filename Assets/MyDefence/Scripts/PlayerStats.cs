@@ -42,7 +42,6 @@ namespace MyDefence
 
             money = startMoney;
             live = startlive;
-            Debug.Log($"초기 소지금 {startMoney} 골드를 지급하였습니다.");
 
         }
         #endregion

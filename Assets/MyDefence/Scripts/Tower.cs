@@ -12,7 +12,7 @@ namespace MyDefence
     {
         #region Variables
         //공격 타겟 Enemy - 가장 가까운 적
-        private GameObject target;
+        protected GameObject target;
 
         //회전
         public Transform partToRotate; //회전을 관리하는 오브젝트
@@ -23,11 +23,11 @@ namespace MyDefence
 
         //찾기 타이머
         public float searchTimer = 0.2f;
-        private float countdown = 0f;
+        protected float countdown = 0f;
 
         //발사 타이머
         public float fireTimer = 1f;
-        private float fireCountdown = 0f;
+        protected float fireCountdown = 0f;
 
         //총알 프리팹 오브젝트
         public GameObject bulletprefab;
@@ -36,13 +36,13 @@ namespace MyDefence
      
 
         #endregion
-        private void Start()
+        protected virtual void Start()
         {
             //초기화
             countdown = searchTimer;
         }
         #region 타이머
-        private void Update()
+        protected virtual void Update()
         {
 
             //0.2초마다 가장 가까운 적 찾기
@@ -86,7 +86,7 @@ namespace MyDefence
 
         #region Custom Method
         //타워에서 가장 가까운 적 찾기
-        void UpdateTarget()
+        protected void UpdateTarget()
         {
             //맵 위에 있는 모든 enemy 게임 오브젝트 가져오기
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -118,7 +118,7 @@ namespace MyDefence
         }
         #endregion
         //타겟을 향해 터렛 헤드 돌리기
-        void LockOn()
+        protected void LockOn()
         {
             Vector3 dir = target.transform.position - this.transform.position;
 
