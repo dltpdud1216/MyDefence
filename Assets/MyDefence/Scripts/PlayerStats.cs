@@ -8,17 +8,18 @@ namespace MyDefence
         #region Variables
         //소지금
         private static int money;
+        //게임 Life
         private static int live;
 
-        //게임 Life
-        private static int lives;
-
-        //초기 소지 생명
+        //초기 소지 골드
         [SerializeField]
         private int startMoney = 400;
         //초기 소지 생명
         [SerializeField]
         private int startlive = 10;
+
+        //웨이브 카운트
+        private static int rounds;
         #endregion
 
         #region Property
@@ -32,7 +33,10 @@ namespace MyDefence
         {
             get { return live; }
         }
-
+        //웨이브 카운트 속성
+        public static int Rounds
+        { get { return rounds; }
+            set { rounds = value; } }
         #endregion
         #region Unity Event Method
         private void Start()
@@ -40,8 +44,9 @@ namespace MyDefence
             //초기화
             //게임을 진행했으면 저장된 데이터를 가져와서 소지금 초기화
 
-            money = startMoney;
-            live = startlive;
+            money = startMoney; //초기 소지금 지급
+            live = startlive; //초기 생명 갯수 지급
+            rounds = 0; //웨이브 카운트 초기화
 
         }
         #endregion

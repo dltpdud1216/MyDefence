@@ -61,6 +61,9 @@ namespace MyDefence
         {
             WaveCount++;
 
+            //웨이브 카운트 
+            PlayerStats.Rounds++;
+
             //0.5초 지연하여 enemy스폰
             for (int i = 0; i < WaveCount; i++)
             {
