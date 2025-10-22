@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal;
 using UnityEngine;
 
 namespace MyDefence
@@ -35,6 +36,12 @@ namespace MyDefence
         //여러개의 타워 Blueprint 중 선택된 타워 Blueprint 저장하는 변수
         private TowerBlueprint towerToBuild;
 
+        //타일 UI
+        public TileUI tileUI;
+
+        //선택된 타일 저장(타일 UI가 있는 타일)
+        private Tile selectTile;
+
         #endregion
 
         #region Property
@@ -58,6 +65,7 @@ namespace MyDefence
                 return PlayerStats.HasMoney(towerToBuild.cost);
             }
         }
+
         #endregion
 
         #region Unity Event Method
@@ -73,7 +81,31 @@ namespace MyDefence
         {
             towerToBuild  = tower;
         }
-       
+        //타워오브젝트가 설치된 타일을 선택,선택된 타일 정보를 매개변수로 받아온다
+        public void SelectTile(Tile tile)
+        {
+            if(tile == selectTile)
+            {
+                DeselectTile();
+                return;
+            }
+
+            //설치될 타워 정보 초기화
+            towerToBuild =null;
+
+            selectTile = tile;
+            tileUI.ShowTileUI(selectTile);
+        }
+
+        //선택된 타일 해제
+        public void DeselectTile()
+        {
+            //설치될 타워 정보 초기화
+            towerToBuild = null;
+
+            tileUI.HideTileUI();
+            selectTile =null;
+        }
         
         #endregion
     }

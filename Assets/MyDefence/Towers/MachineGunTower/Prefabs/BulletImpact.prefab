@@ -4906,3 +4906,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Impactprefab: {fileID: 0}
   moveSpeed: 70
+  attackDamage: 50

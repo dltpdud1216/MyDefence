@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Bullet
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_Parent: {fileID: 2100000, guid: fc322682fd85f4e49b5188a69cc1c3dc, type: 2}
+  m_Parent: {fileID: 2100000, guid: 44693a166afc29d4884fb9bae584b9fc, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -29,8 +29,8 @@ Material:
     m_Floats:
     - _Metallic: 1
     m_Colors:
-    - _BaseColor: {r: 0.254539, g: 0.4244282, b: 0.9811321, a: 1}
-    - _Color: {r: 0.25453898, g: 0.42442816, b: 0.9811321, a: 1}
+    - _BaseColor: {r: 0.022774696, g: 0, b: 1, a: 1}
+    - _Color: {r: 0.022774696, g: 0, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &365426006241742740

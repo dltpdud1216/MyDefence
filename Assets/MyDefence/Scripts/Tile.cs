@@ -3,7 +3,7 @@ using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Sample
+namespace MyDefence
 {
     /// <summary>
     /// 맵 타일을 관리하는 클래스 
@@ -17,7 +17,7 @@ namespace Sample
 
         //타일에 설치된 타워 오브젝트 인스턴스
         private GameObject tower;
-        //타일에 설치된 타워 오브젝트 blueprint 정보 객체(프리팹,가격,설치조정위치)
+        //타일에 설치된 타워 오브젝트 blueprint 정보 객체(프리팹,가격,설치조정위치,업그레이드 프리팹,업그레이드 가격)
         private TowerBlueprint blueprint;
 
         //랜더러 컨포넌트 인스턴스 변수 선언
@@ -60,15 +60,17 @@ namespace Sample
             {
                 return;
             }
-            //만약 타워를 선택하지 않았으면 변경되지 않는다
-            if (buildManager.CannotBuild)
-            {
-                return;
-            }
+            
             //만약 타일에 타워오브젝트가 있으면 설치하지 않기
             if (tower != null)
             {
-                Debug.Log("타워가 이미 설치되어 있습니다");
+                Debug.Log("타워오브젝트가 설치된 타일을 선택했습니다.");
+                buildManager.SelectTile(this);
+                return;
+            }
+            //만약 타워를 선택하지 않았으면 변경되지 않는다
+            if (buildManager.CannotBuild)
+            {
                 return;
             }
             if (buildManager.HasBuildCost)
@@ -128,6 +130,39 @@ namespace Sample
 
             //turretToBuild = null; 건설 후 다시 건설하지 못하게 한다
             buildManager.SetTurretToBuild(null);
+
+        }
+
+        //업그레이드 타워
+        public void UpgradeTower()
+        {
+            //Debug.Log("설치된 타워를 업그레이드 합니다");
+
+            //업그레이드 비용체크
+            if (PlayerStats.HasMoney(blueprint.upgradeCost) == false)
+            {
+                Debug.Log("업그레이드 비용이 부족합니다.");
+
+                return;
+            }
+            //업그레이드 비용 처리
+            PlayerStats.Usemoney(blueprint.upgradeCost);
+
+            //기존 설치된 타워 킬
+            Destroy(tower);
+            tower = null;
+
+            //업그레이드 타워 건설
+            tower = Instantiate(blueprint.upgradePrefab, this.transform.position + blueprint.offsetPos, Quaternion.identity);
+            //건설,업그레이드 공유/ 이펙트 효과
+            GameObject effectGo = Instantiate(buildEffectprefab, this.transform.position, Quaternion.identity);
+            Destroy(effectGo, 2f);
+
+            //turretToBuild = null; 건설 후 다시 건설하지 못하게 한다
+            buildManager.SetTurretToBuild(null);
+
+            //선택된 타일 해제
+            buildManager.DeselectTile();
 
         }
         #endregion
