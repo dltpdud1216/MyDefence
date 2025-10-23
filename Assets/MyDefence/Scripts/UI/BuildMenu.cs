@@ -25,18 +25,25 @@ namespace MyDefence
         {
             //Debug.Log("머신건 타워를 선택했습니다.");
 
+            //타일 선택 정보 초기화
+            buildManager.DeselectTile();
+
             //turretToBuild = machineGunPrefab;
             //BuildManager.Instance.SetTurretToBuild(BuildManager.Instance.mechinGunPrefab); 요약 >>
             buildManager.SetTurretToBuild(machineGun);
         }
         public void SelectRocketTower()
         {
+            //타일 선택 정보 초기화
+            buildManager.DeselectTile();
 
             buildManager.SetTurretToBuild(rocketTower);
 
         }
         public void SelectLaserTower()
         {
+            //타일 선택 정보 초기화
+            buildManager.DeselectTile();
 
             buildManager.SetTurretToBuild(LaserTower);
 

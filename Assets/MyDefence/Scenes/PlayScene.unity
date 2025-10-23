@@ -4660,18 +4660,24 @@ MonoBehaviour:
     cost: 100
     upgradePrefab: {fileID: 680966760754865301, guid: 80b991bd167afc049b8d4f9615a87ae5, type: 3}
     upgradeCost: 150
+    twoupgradePrefab: {fileID: 4074427435027755731, guid: b720465421bfa9f43b2b33263801c2e4, type: 3}
+    twoupgradeCost: 300
     offsetPos: {x: 0, y: 0, z: 0}
   rocketTower:
     prefab: {fileID: 3620327247462165442, guid: 45c67f494d0b5fe458e58c83e0240d92, type: 3}
     cost: 250
-    upgradePrefab: {fileID: 0}
-    upgradeCost: 0
+    upgradePrefab: {fileID: 6543901445297073496, guid: 6cbc031fdcf8d0d408298b089cc92cc1, type: 3}
+    upgradeCost: 350
+    twoupgradePrefab: {fileID: 7759295254589461999, guid: a5ccd93d1b63d0e4bb2c023a260a60a5, type: 3}
+    twoupgradeCost: 600
     offsetPos: {x: 0, y: 0, z: 0}
   LaserTower:
     prefab: {fileID: 854896131067321605, guid: 0cc10955181df524e9c68aaed917590e, type: 3}
     cost: 350
-    upgradePrefab: {fileID: 0}
-    upgradeCost: 0
+    upgradePrefab: {fileID: 8823161936774474033, guid: af0240e218a5f1c44b618ee6c19ff19f, type: 3}
+    upgradeCost: 500
+    twoupgradePrefab: {fileID: 4608238902047716042, guid: 9d56337968ddf0d4b9434d808012d1d8, type: 3}
+    twoupgradeCost: 900
     offsetPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1520916045
 GameObject:
@@ -7788,7 +7794,7 @@ Transform:
   m_GameObject: {fileID: 3058791710647845487}
   serializedVersion: 2
   m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: 0, y: 5, z: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7830,6 +7836,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 3058791710647845487}
+  upgradeCostTxt: {fileID: 3136930839082596934}
+  upgradeButton: {fileID: 7304401092132284230}
+  sellCostTxt: {fileID: 2720410164898423094}
 --- !u!1 &3646919388720876061
 GameObject:
   m_ObjectHideFlags: 0
@@ -7842,7 +7851,7 @@ GameObject:
   - component: {fileID: 1047513391845857970}
   - component: {fileID: 3136930839082596934}
   m_Layer: 5
-  m_Name: CostTxt
+  m_Name: UpgradeCostTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8272,7 +8281,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3298487229878828167}
         m_TargetAssemblyTypeName: MyDefence.TileUI, Assembly-CSharp
-        m_MethodName: Sell
+        m_MethodName: SellTower
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8406,7 +8415,7 @@ GameObject:
   - component: {fileID: 2840754441969174669}
   - component: {fileID: 2720410164898423094}
   m_Layer: 5
-  m_Name: CostTxt
+  m_Name: SellCostTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

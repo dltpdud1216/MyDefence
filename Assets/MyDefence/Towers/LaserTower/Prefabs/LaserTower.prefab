@@ -4978,6 +4978,8 @@ MonoBehaviour:
   firePoint: {fileID: 2697672729066450104}
   laserImpact: {fileID: 5277394819939619971}
   ImpactLight: {fileID: 6871334734847335151}
+  laserDamage: 30
+  slowrate: 0.4
 --- !u!120 &2648303410164138414
 LineRenderer:
   serializedVersion: 2
@@ -5024,8 +5026,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 4}
+  - {x: 0, y: 2, z: 0}
+  - {x: 0, y: 2, z: 5}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -5034,7 +5036,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.31428683
+        value: 0.23288882
         inSlope: 0
         outSlope: 0
         tangentMode: 0

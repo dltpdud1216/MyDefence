@@ -16,6 +16,15 @@ namespace MyDefence
         public GameObject upgradePrefab; //건설된 타워를 업그레이드 하기 위한 프리팹 오브젝트
         public int upgradeCost; //건설된 타워의 업그레이드 비용
 
+        public GameObject twoupgradePrefab; //건설된 타워를 업그레이드 하기 위한 프리팹 오브젝트
+        public int twoupgradeCost;
+
         public Vector3 offsetPos; // 타워 건설시 위치 조정 값
+
+        //판매가격
+        public int GetSellCost()
+        {
+            return cost / 2;
+        }
     }
 }
