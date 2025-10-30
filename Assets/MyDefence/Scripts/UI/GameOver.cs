@@ -11,6 +11,10 @@ namespace MyDefence
     /// </summary>
     public class GameOver : MonoBehaviour
     {
+        public SceneFader fader;
+        [SerializeField]
+        private string loadToSene = "MainMenu";
+
         #region Variables
         //Rounds 텍스트
         public TextMeshProUGUI roundsText;
@@ -34,7 +38,8 @@ namespace MyDefence
         //메인 메뉴 버튼을 눌렀을때 호출
         public void MainMenu()
         {
-            Debug.Log("Goto MainMenu!!");
+            //Debug.Log("Goto MainMenu!!");
+            fader.FadeTo(loadToSene);
         }
 
         //게임 재시작 버튼 눌렀을때 호출
@@ -48,7 +53,7 @@ namespace MyDefence
             int nowBuildIndex = SceneManager.GetActiveScene().buildIndex;*/
 
             string nowSceneName = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene("nowSceneName"); //씬 이름으로 호출
+            fader.FadeTo("nowSceneName"); //씬 이름으로 호출
 
         }
         #endregion

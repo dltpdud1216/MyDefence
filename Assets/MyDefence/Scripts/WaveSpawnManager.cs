@@ -1,8 +1,9 @@
 using System;
-using UnityEngine;
-using UnityEngine.UIElements;
 using System.Collections;
 using TMPro;
+using UnityEditor.PackageManager;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace MyDefence
 {
@@ -12,6 +13,13 @@ namespace MyDefence
     public class WaveSpawnManager : MonoBehaviour
     {
         #region Variable 적 프리팹 오브젝트 - 원본
+
+        //현재 살아있는 적의 수
+        public static int enemyAlive = 0;
+
+        //웨이브 데이터 세팅 : 프리팹,생성갯수, 생성 딜레이
+        public Wave[] waves;  //waves[0] ~ waves[4]
+
         public GameObject EnemyPrefab;
         //public Transform Spawn; = this.transform
 
@@ -20,10 +28,16 @@ namespace MyDefence
         private float countdown = 0f;   //시간 누적 변수
 
         //웨이브 카운트
-        private int WaveCount = 0;
+        private int waveCount = 0;
 
-        //UI
-        public TextMeshProUGUI countdownText;
+        //이번 웨이브에 생성되는 적의 수
+        private int enemyCount;
+
+        //UI - Text
+        public GameObject startButton;
+        public GameObject waveCountUI;
+
+        public TextMeshProUGUI waveCountText;
 
         #endregion
 
@@ -35,12 +49,13 @@ namespace MyDefence
 
         private void Update()
         {
+            /*
             //스폰(5초) 타이머
             countdown += Time.deltaTime;
             if (countdown >= spawnTimer)
             {
                 //타이머 기능 실행
-                StartCoroutine( SpawnWave());
+                WaveSpawn();
                 //타이머 초기화
                 countdown = 0f;
             }
@@ -50,31 +65,80 @@ namespace MyDefence
             countdown = Mathf.Clamp(countdown, 0f,Mathf.Infinity);
             countdownText.text = string.Format("{0:00.00}",countdown); // 실수(소수점 이하)출력
             //##.##으로 출력 시 0은 안찍힘
-            countdownText.text = Mathf.Round(countdown).ToString(); //Round = 반올림/ 반오림하여 정수형 출력
+            countdownText.text = Mathf.Round(countdown).ToString(); //Round = 반올림/ 반올림하여 정수형 출력*/
 
+            if(enemyAlive <= 0)
+            {
+                if (startButton.activeSelf == false)
+                {
+                    WaveReady();
+                }
+            }
+            else
+            {
+                waveCountText.text = enemyAlive.ToString() + " / " + enemyCount.ToString();
+            }
         }
         #endregion
 
         #region Custum Method
+
+        private void WaveSpawn()
+        {
+            StartCoroutine(SpawnWave());
+        }
         //enemy 스폰 웨이브
         IEnumerator SpawnWave()
         {
-            WaveCount++;
+            //waves[0],waves[1],waves[2],waves[3], waves[4]
+            //웨이브 생성 데이터
+            Wave wave = waves[waveCount];
+
+            waveCount++;   
 
             //웨이브 카운트 
             PlayerStats.Rounds++;
 
-            //0.5초 지연하여 enemy스폰
-            for (int i = 0; i < WaveCount; i++)
+            enemyCount = wave.count;
+            enemyAlive = enemyCount;
+
+            //wave데이터로 생성
+            for (int i = 0; i < wave.count; i++)
             {
-                EnemySpawn();
-                yield return new WaitForSeconds(0.5f);
+                EnemySpawn(wave.prefab);
+                yield return new WaitForSeconds(wave.delayTime);
             }
         }
         //시작점 위치에 enemy 1개 생성
-        void EnemySpawn()
+        void EnemySpawn(GameObject prefab)
         {
-            Instantiate(EnemyPrefab, this.transform.position, Quaternion.identity);
+            Instantiate(prefab, this.transform.position, Quaternion.identity);
+        }
+
+        //WaveStart버튼 클릭시 호출
+        public void WaveStart()
+        {
+            //UI세팅
+            startButton.SetActive(false); 
+            waveCountUI.SetActive(true);
+
+            //웨이브 시작
+            WaveSpawn();
+        }
+        //웨이브 대기
+        private void WaveReady()
+        {
+            //마지막 웨이브가 끝났는지 체크 - 웨이브 스폰 기능 정지
+            if (waveCount >= waves.Length)
+            {
+                //UI 제거
+                waveCountUI.SetActive(false);
+                startButton.SetActive(false);
+
+                GameManager.IsLevelClear = true;
+            }
+            startButton.SetActive(true);
+            waveCountUI.SetActive(false);
         }
         #endregion
 

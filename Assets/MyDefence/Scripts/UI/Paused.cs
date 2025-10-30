@@ -13,6 +13,12 @@ namespace MyDefence
 
         #region Variables
         public GameObject pausedUI;
+
+        //씬 페이더
+        public SceneFader fader;
+        //메뉴 씬 이름
+        [SerializeField]
+        private string loadToScene = "MainMenu";
         #endregion
 
         #region Unity Event Method
@@ -44,19 +50,20 @@ namespace MyDefence
         }
         public void MainMenu()
         {
-            Debug.Log("Goto MainMenu!!");
+            fader.FadeTo(loadToScene);
+            Time.timeScale = 1f;
         }
         public void Restart()
         {
-            Debug.Log("Restart");
-
             //웨이브,돈,라이프 초기화,타워 제거
             //현재 플레이 하고 있는 씬을 다시 호출
-            /*SceneManager.LoadScene(0);  = 씬 빌드번호로 호출
-           int nowBuildIndex = SceneManager.GetActiveScene().buildIndex;*/
+            //SceneManager.LoadScene(0);  = 씬 빌드번호로 호출
+           int nowBuildIndex = SceneManager.GetActiveScene().buildIndex;
 
-            int nowBuildIndex = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(nowBuildIndex);
+            /*int nowBuildIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(nowBuildIndex);*/
+
+            fader.FadeTo(nowBuildIndex);
 
             Time.timeScale = 1f;
 

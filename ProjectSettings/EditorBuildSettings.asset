@@ -6,8 +6,23 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/MyDefence/Scenes/PlayScene.unity
+    path: Assets/MyDefence/Scenes/Title.unity
+    guid: 50dacffe98fb5544282edace1afd45e6
+  - enabled: 1
+    path: Assets/MyDefence/Scenes/Level01.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/MyDefence/Scenes/MainMenu.unity
+    guid: c7f85053dc075574d8ceeded9052187b
+  - enabled: 1
+    path: Assets/MyDefence/Scenes/LevelSelect.unity
+    guid: 4a5106b33d0a32a4589bcf20b12376b6
+  - enabled: 1
+    path: Assets/MyDefence/Scenes/Level02.unity
+    guid: 86a62d13e1f161d4fb480bd56786c28a
+  - enabled: 1
+    path: Assets/MyDefence/Scenes/Level03.unity
+    guid: fcc0ac0567d49cb4184900a3131571dd
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

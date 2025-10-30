@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+
 using static UnityEngine.GraphicsBuffer;
 
 namespace MyDefence
@@ -22,6 +24,9 @@ namespace MyDefence
         [SerializeField]
         private float startSpeed = 4f;
 
+        //이동 WayPoint 인덱스
+        private int wayPointIndex;
+
         //체력
         private float health;
         [SerializeField]
@@ -36,6 +41,9 @@ namespace MyDefence
         //죽음 보상
         [SerializeField]
         private int rewardMoney = 50;
+
+        //UI
+        public Image hpBarImage;
         #endregion
 
 
@@ -43,11 +51,15 @@ namespace MyDefence
         void Start()
         {
             //초기화
-            target = WayPoints.points[0];
             health = startHealth;
             speed = startSpeed;
+            wayPointIndex = 0;
+
+            //이동 목표 지점 0번으로 설정 설정
+            target = WayPoints.points[wayPointIndex];
+
         }
-                // Update is called once per frame
+        // Update is called once per frame
         void Update()
         {
             //타겟을 향해 이동
@@ -55,21 +67,46 @@ namespace MyDefence
             this.transform.Translate(dir.normalized * Time.deltaTime * speed);
 
             //도착 판정
-            //타겟과 enemy의 
+            //타겟과 enemy의 거리를 구해서 일정거리안에 들어오면 도착이라고 판정한다
             float distance = Vector3.Distance(target.position, this.transform.position);
-            if (distance < 0.5f)
+            if (distance <= 0.1f)
             {
-                Arrive();
+                SetNextTarget();
+                //Arrive();
             }
             //이동속도 초기 속도로 복원
             speed = startSpeed;
         }
         #region Custom Method
+        //다음 타겟 설정
+        private void SetNextTarget()
+        {
+
+            if (wayPointIndex == WayPoints.points.Length-1)
+            {
+                Debug.Log("종점 도착");
+                Arrive();
+                return;
+            }
+
+            Debug.Log("다음 타겟 설정:wayPointIndex++");
+
+            wayPointIndex++;
+
+            target = WayPoints.points[wayPointIndex];
+
+            
+        }
+
         //종점 도착
         private void Arrive()
         {
             //생명 사용
             PlayerStats.UseLife(1);
+
+            //살아있는 적의 수를 줄인다
+            WaveSpawnManager.enemyAlive--;
+
             //Enemy 킬
             Destroy(this.gameObject);
         }
@@ -78,6 +115,9 @@ namespace MyDefence
         public void TakeDamage(float amount)
         {
             health -= amount;
+
+            //UI
+            hpBarImage.fillAmount = health / startHealth;
 
             //죽음체크
             if (health <= 0 && isDeath == false)
@@ -96,6 +136,9 @@ namespace MyDefence
 
             GameObject effectGo = Instantiate(deathEffectprefab, this.transform.position, Quaternion.identity);
             Destroy(effectGo, 2f);
+
+            //살아있는 적의 수를 줄인다
+            WaveSpawnManager.enemyAlive--;
 
             //보상 처리
            PlayerStats.AddMoney(rewardMoney);

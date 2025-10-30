@@ -32,7 +32,9 @@ public class CameraController : MonoBehaviour
         #region Unity Event Method
         private void Update()
         {
-          
+            //게임오버 체크
+            if (GameManager.IsGameOver)
+                return;
 
             //esc key를 한 번 누르면 카메라 이동을 못하게 막는다 isCannotMove = true
             //다시 esc key를 누르면 카메라 이동을 다시 가능하게 한다 isCannotMove = false
@@ -73,29 +75,7 @@ public class CameraController : MonoBehaviour
             {
                 this.transform.Translate(Vector3.right * Time.deltaTime * moveSpeed, Space.World);
             }
-            //마우스를 스크린 상하좌우 끝 부분(기준 폭: 10)에 가져가면 맵을 스크롤 시킨다
-            float mouseX = Input.mousePosition.x;
-            float mouseY = Input.mousePosition.y;
-            //Debug.Log($"마우스 position{mouseX},{mouseY}");
-
-            //앞으로 이동 - height, height -10
-            if (mouseY >= (Screen.height - border) && mouseY<= Screen.height)
-            {
-                this.transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed, Space.World);
-            }
-            if (mouseY >= 0f && mouseY <= border)
-            {
-                this.transform.Translate(Vector3.back * Time.deltaTime * moveSpeed, Space.World);
-            }
-
-            if (mouseX >= 0f && mouseX <= border)
-            {
-                this.transform.Translate(Vector3.left * Time.deltaTime * moveSpeed, Space.World);
-            }
-            if (mouseX >= (Screen.width - border) && mouseX <= Screen.width)
-            {
-                this.transform.Translate(Vector3.right * Time.deltaTime * moveSpeed, Space.World);
-            }
+           
 
             //마우스 스크롤값을 입력 받아 줌인, 줌아웃(높이조절)기능 구현
             float scroll = Input.GetAxis("Mouse ScrollWheel");
